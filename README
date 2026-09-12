@@ -1,168 +1,1167 @@
-Linux kernel
-============
+# ATLAS SANCTUM
 
-The Linux kernel is the core of any Linux operating system. It manages hardware,
-system resources, and provides the fundamental services for all other software.
+### The Open Intelligence Substrate for Human Flourishing
 
-Quick Start
------------
+> **Linux is the foundation.
+> Atlas is the intelligence layer.
+> Reality is the laboratory.
+> Human flourishing is the objective.**
 
-* Report a bug: See Documentation/admin-guide/reporting-issues.rst
-* Get the latest kernel: https://kernel.org
-* Build the kernel: See Documentation/admin-guide/quickly-build-trimmed-linux.rst
-* Join the community: https://lore.kernel.org/
+<p align="center">
+  <img src="./docs/atlas-sanctum-architecture.png" alt="Atlas Sanctum Systems Architecture" width="100%">
+</p>
 
-Essential Documentation
------------------------
+<p align="center">
+  <strong>Observe deeply. Question relentlessly. Recombine boldly. Build what is missing.</strong>
+</p>
 
-All users should be familiar with:
+---
 
-* Building requirements: Documentation/process/changes.rst
-* Code of Conduct: Documentation/process/code-of-conduct.rst
-* License: See COPYING
+## 🌍 What Is Atlas Sanctum?
 
-Documentation can be built with make htmldocs or viewed online at:
-https://www.kernel.org/doc/html/latest/
+**Atlas Sanctum** is an open, Linux-native intelligence and coordination substrate designed to help people, organizations, communities, cities, and institutions understand reality, discover opportunity, coordinate resources, invent new solutions, and measure real-world impact.
 
+It is not simply an application.
 
-Who Are You?
-============
+It is conceived as a **technological foundation, intelligence platform, research institution, invention laboratory, economic coordination network, and knowledge system** that can operate across the physical and digital world.
 
-Find your role below:
+Atlas connects:
 
-* New Kernel Developer: Getting started with kernel development
-* Academic Researcher: Studying kernel internals and architecture
-* Security Expert: Hardening and vulnerability analysis
-* Backport/Maintenance Engineer: Maintaining stable kernels
-* System Administrator: Configuring and troubleshooting
-* Maintainer: Leading subsystems and reviewing patches
-* Hardware Vendor: Writing drivers for new hardware
-* Distribution Maintainer: Packaging kernels for distros
-* AI Coding Assistant: LLMs and AI-powered development tools
+```text
+Linux Infrastructure
+        ↓
+Atlas Nodes
+        ↓
+Reality Data
+        ↓
+Intelligence
+        ↓
+Opportunity Discovery
+        ↓
+Simulation & Decision
+        ↓
+Coordination
+        ↓
+Invention & Execution
+        ↓
+Measurement
+        ↓
+Learning
+        ↺
+```
 
+The long-term objective is to create an open substrate through which intelligence can be applied to the problems and possibilities already embedded within civilization.
 
-For Specific Users
-==================
+---
 
-New Kernel Developer
---------------------
+# 🧭 The Atlas Thesis
 
-Welcome! Start your kernel development journey here:
+Civilization contains enormous amounts of unused capability.
 
-* Getting Started: Documentation/process/development-process.rst
-* Your First Patch: Documentation/process/submitting-patches.rst
-* Coding Style: Documentation/process/coding-style.rst
-* Build System: Documentation/kbuild/index.rst
-* Development Tools: Documentation/dev-tools/index.rst
-* Kernel Hacking Guide: Documentation/kernel-hacking/hacking.rst
-* Core APIs: Documentation/core-api/index.rst
+Unused machines.
 
-Academic Researcher
--------------------
+Unused land.
 
-Explore the kernel's architecture and internals:
+Unused infrastructure.
 
-* Researcher Guidelines: Documentation/process/researcher-guidelines.rst
-* Memory Management: Documentation/mm/index.rst
-* Scheduler: Documentation/scheduler/index.rst
-* Networking Stack: Documentation/networking/index.rst
-* Filesystems: Documentation/filesystems/index.rst
-* RCU (Read-Copy Update): Documentation/RCU/index.rst
-* Locking Primitives: Documentation/locking/index.rst
-* Power Management: Documentation/power/index.rst
+Unused knowledge.
 
-Security Expert
----------------
+Unused materials.
 
-Security documentation and hardening guides:
+Unused skills.
 
-* Security Documentation: Documentation/security/index.rst
-* LSM Development: Documentation/security/lsm-development.rst
-* Self Protection: Documentation/security/self-protection.rst
-* Reporting Vulnerabilities: Documentation/process/security-bugs.rst
-* CVE Procedures: Documentation/process/cve.rst
-* Embargoed Hardware Issues: Documentation/process/embargoed-hardware-issues.rst
-* Security Features: Documentation/userspace-api/seccomp_filter.rst
+Unused energy.
 
-Backport/Maintenance Engineer
------------------------------
+Unused capital.
 
-Maintain and stabilize kernel versions:
+Unused data.
 
-* Stable Kernel Rules: Documentation/process/stable-kernel-rules.rst
-* Backporting Guide: Documentation/process/backporting.rst
-* Applying Patches: Documentation/process/applying-patches.rst
-* Subsystem Profile: Documentation/maintainer/maintainer-entry-profile.rst
-* Git for Maintainers: Documentation/maintainer/configure-git.rst
+Unused human creativity.
 
-System Administrator
---------------------
+The problem is often not the absence of resources.
 
-Configure, tune, and troubleshoot Linux systems:
+The problem is the absence of **coordination, visibility, intelligence, and recombination**.
 
-* Admin Guide: Documentation/admin-guide/index.rst
-* Kernel Parameters: Documentation/admin-guide/kernel-parameters.rst
-* Sysctl Tuning: Documentation/admin-guide/sysctl/index.rst
-* Tracing/Debugging: Documentation/trace/index.rst
-* Performance Security: Documentation/admin-guide/perf-security.rst
-* Hardware Monitoring: Documentation/hwmon/index.rst
+Atlas Sanctum is built around a simple proposition:
 
-Maintainer
-----------
+> **Discover value that reality is already holding.**
 
-Lead kernel subsystems and manage contributions:
+An Atlas system observes the world, understands relationships between its components, discovers hidden opportunities, tests possible futures, coordinates action, measures results, and learns continuously.
 
-* Maintainer Handbook: Documentation/maintainer/index.rst
-* Pull Requests: Documentation/maintainer/pull-requests.rst
-* Managing Patches: Documentation/maintainer/modifying-patches.rst
-* Rebasing and Merging: Documentation/maintainer/rebasing-and-merging.rst
-* Development Process: Documentation/process/maintainer-handbooks.rst
-* Maintainer Entry Profile: Documentation/maintainer/maintainer-entry-profile.rst
-* Git Configuration: Documentation/maintainer/configure-git.rst
+---
 
-Hardware Vendor
----------------
+# 🏗️ Architecture
 
-Write drivers and support new hardware:
+Atlas Sanctum is envisioned as a layered architecture extending from operating-system infrastructure to civilization-scale intelligence.
 
-* Driver API Guide: Documentation/driver-api/index.rst
-* Driver Model: Documentation/driver-api/driver-model/driver.rst
-* Device Drivers: Documentation/driver-api/infrastructure.rst
-* Bus Types: Documentation/driver-api/driver-model/bus.rst
-* Device Tree Bindings: Documentation/devicetree/bindings/
-* Power Management: Documentation/driver-api/pm/index.rst
-* DMA API: Documentation/core-api/dma-api.rst
+```text
+┌──────────────────────────────────────────────────────────────┐
+│                    HUMAN FLOURISHING                         │
+│                                                              │
+│  Health • Education • Dignity • Opportunity • Creativity     │
+│  Resilient Cities • Clean Water • Energy • Ecology           │
+│  Scientific Progress • Thriving Communities                  │
+└──────────────────────────────────────────────────────────────┘
+                              ▲
+                              │
+┌──────────────────────────────────────────────────────────────┐
+│              ECONOMIC & COORDINATION LAYER                  │
+│                                                              │
+│ Capital → Projects → Infrastructure → Outcomes              │
+│       → Measurement → Reinvestment                           │
+│                                                              │
+│ Markets • Enterprise • Impact Finance • Allocation           │
+│ Local Economies • Global Coordination                        │
+└──────────────────────────────────────────────────────────────┘
+                              ▲
+                              │
+┌──────────────────────────────────────────────────────────────┐
+│              OPPORTUNITY & INVENTION LAYER                  │
+│                                                              │
+│ Opportunity Graph • Simulation • AI Agents                    │
+│ Research • Prototyping • First Principles • Innovation       │
+│                                                              │
+│ OBSERVE → DETECT → RECOMBINE → INVENT → TEST → SCALE         │
+└──────────────────────────────────────────────────────────────┘
+                              ▲
+                              │
+┌──────────────────────────────────────────────────────────────┐
+│                    ATLAS CORE                               │
+│                                                              │
+│ Regenerative Intelligence                                   │
+│ Civilization Intelligence                                    │
+│ Moral Intelligence                                           │
+│ Opportunity Graph                                            │
+│ Knowledge Graph                                              │
+│ Atlas Policy Engine                                          │
+│ AI Agents                                                    │
+│ Simulation Engine                                            │
+│ Impact Ledger                                                │
+│ Trust & Identity                                             │
+│ Economic Coordination                                        │
+│ Human Flourishing                                            │
+└──────────────────────────────────────────────────────────────┘
+                              ▲
+                              │
+┌──────────────────────────────────────────────────────────────┐
+│                     REALITY LAYER                            │
+│                                                              │
+│ People • Cities • Farms • Hospitals • Factories              │
+│ Universities • Markets • Roads • Water • Energy              │
+│ Ecosystems • Machines • Vehicles • Sensors • Satellites      │
+│ GIS • Drones • Mobile Devices • Human Observations           │
+└──────────────────────────────────────────────────────────────┘
+                              ▲
+                              │
+┌──────────────────────────────────────────────────────────────┐
+│                   ATLAS NODE NETWORK                         │
+│                                                              │
+│ Edge • Offline • Community • Institutional • Enterprise      │
+│                                                              │
+│     Run Your Own Node → Join the Network                     │
+│     Keep Local Sovereignty → Share Intelligence              │
+└──────────────────────────────────────────────────────────────┘
+                              ▲
+                              │
+┌──────────────────────────────────────────────────────────────┐
+│             LINUX-NATIVE OPEN FOUNDATION                    │
+│                                                              │
+│ Linux • Containers • Kubernetes • Networking                 │
+│ Storage • Security • Distributed Systems • Edge Computing    │
+│ Open Protocols • Developer Ecosystems • Open Source          │
+└──────────────────────────────────────────────────────────────┘
+```
 
-Distribution Maintainer
------------------------
+---
 
-Package and distribute the kernel:
+# 🐧 Linux-Native Open Foundation
 
-* Stable Kernel Rules: Documentation/process/stable-kernel-rules.rst
-* ABI Documentation: Documentation/ABI/README
-* Kernel Configuration: Documentation/kbuild/kconfig.rst
-* Module Signing: Documentation/admin-guide/module-signing.rst
-* Kernel Parameters: Documentation/admin-guide/kernel-parameters.rst
-* Tainted Kernels: Documentation/admin-guide/tainted-kernels.rst
+Atlas is designed to stand on open infrastructure rather than recreate the operating system beneath it.
 
-AI Coding Assistant
--------------------
+The foundational layer includes:
 
-CRITICAL: If you are an LLM or AI-powered coding assistant, you MUST read and
-follow the AI coding assistants documentation before contributing to the Linux
-kernel:
+* Linux
+* Open source
+* Containers
+* Kubernetes
+* Distributed systems
+* Networking
+* Storage
+* Identity
+* Security
+* Edge computing
+* Open protocols
+* Observability
+* Developer tooling
+* Local compute
+* Cloud infrastructure
 
-* Documentation/process/coding-assistants.rst
+The philosophy is simple:
 
-This documentation contains essential requirements about licensing, attribution,
-and the Developer Certificate of Origin that all AI tools must comply with.
+> **Build on open foundations. Extend capability upward.**
 
+Atlas should be deployable across everything from a small edge computer to a regional infrastructure cluster.
 
-Communication and Support
-=========================
+---
 
-* Mailing Lists: https://lore.kernel.org/
-* IRC: #kernelnewbies on irc.oftc.net
-* Bugzilla: https://bugzilla.kernel.org/
-* MAINTAINERS file: Lists subsystem maintainers and mailing lists
-* Email Clients: Documentation/process/email-clients.rst
+# 🛰️ Atlas Nodes
+
+An **Atlas Node** is a physical-digital instance of the Atlas system.
+
+It can operate:
+
+* in a village
+* on a farm
+* inside a workshop
+* in a hospital
+* at a university
+* inside a factory
+* within an enterprise
+* across a county
+* throughout a city
+* inside a research institution
+* at an ecological restoration site
+
+Nodes can operate independently or participate in a larger network.
+
+```text
+             ┌──────────────┐
+             │ Atlas Node A │
+             └──────┬───────┘
+                    │
+        ┌───────────┼───────────┐
+        ▼           ▼           ▼
+   Local Data    Local AI    Local Agents
+        │           │           │
+        └───────────┼───────────┘
+                    │
+             Secure Protocols
+                    │
+        ┌───────────┼───────────┐
+        ▼           ▼           ▼
+   Regional Node  Cloud    Global Network
+```
+
+### Node principles
+
+**Local sovereignty**
+
+Data and decisions should remain as close to their origin as practical.
+
+**Offline capability**
+
+Important systems should continue functioning when connectivity disappears.
+
+**Interoperability**
+
+Nodes should communicate through open protocols rather than proprietary silos.
+
+**Composability**
+
+A node should be extensible through services, agents, adapters, models, and applications.
+
+---
+
+# 🌍 The Reality Layer
+
+Atlas does not treat reality as an abstract database.
+
+It treats reality as the laboratory.
+
+The system may ingest signals from:
+
+```text
+People
+Sensors
+Satellites
+GIS
+Drones
+Phones
+Machines
+Vehicles
+Cameras
+Industrial systems
+Enterprise systems
+Scientific instruments
+Open datasets
+Human observations
+Field research
+```
+
+These signals can describe:
+
+* cities
+* farms
+* supply chains
+* hospitals
+* factories
+* roads
+* energy systems
+* water networks
+* markets
+* ecosystems
+* infrastructure
+* communities
+* environmental conditions
+
+The objective is not surveillance for its own sake.
+
+The objective is **better understanding of systems so that people can make better decisions**.
+
+---
+
+# 🧠 The Atlas Core
+
+At the center of Atlas Sanctum is the **Atlas Core**.
+
+It is envisioned as a living computational system that combines models, graphs, policies, agents, simulations, knowledge, and real-world observations.
+
+### Core capabilities
+
+| Capability                | Purpose                                                    |
+| ------------------------- | ---------------------------------------------------------- |
+| Regenerative Intelligence | Optimize toward long-term ecological and social resilience |
+| Civilization Intelligence | Understand large-scale human systems                       |
+| Moral Intelligence        | Encode ethical constraints and human oversight             |
+| Opportunity Graph         | Discover hidden connections between needs and resources    |
+| Knowledge Graph           | Organize structured knowledge and relationships            |
+| Policy Engine             | Translate principles and rules into executable policies    |
+| AI Agents                 | Perform reasoning, planning, research, and execution       |
+| Simulation Engine         | Explore possible futures before acting                     |
+| Impact Ledger             | Track outcomes and real-world effects                      |
+| Trust & Identity          | Establish secure identities and permissions                |
+| Economic Coordination     | Connect capital, projects, infrastructure, and outcomes    |
+
+---
+
+# 🔭 The Intelligence Loop
+
+Atlas continuously cycles through a planetary feedback loop:
+
+```text
+OBSERVE
+   ↓
+UNDERSTAND
+   ↓
+SIMULATE
+   ↓
+DECIDE
+   ↓
+COORDINATE
+   ↓
+BUILD
+   ↓
+MEASURE
+   ↓
+LEARN
+   ↓
+IMPROVE
+   ↺
+```
+
+The system becomes more valuable as the loop becomes more accurate, more transparent, more distributed, and more useful to the people operating it.
+
+---
+
+# 🕸️ Opportunity Graph
+
+One of the central concepts in Atlas is the **Opportunity Graph**.
+
+Instead of looking at a problem in isolation, Atlas models relationships between:
+
+```text
+Needs
+Resources
+People
+Skills
+Capital
+Infrastructure
+Knowledge
+Problems
+Projects
+Markets
+Ecological Systems
+Opportunities
+```
+
+This allows hidden relationships to become visible.
+
+### Example
+
+```text
+Unused Machinery
+       +
+Skilled Workers
+       +
+Waste Materials
+       +
+Housing Demand
+       ↓
+Local Manufacturing Opportunity
+       ↓
+New Enterprise
+       ↓
+Local Jobs
+       ↓
+Infrastructure
+       ↓
+Community Value
+```
+
+The graph turns fragmented information into potential action.
+
+---
+
+# 🧪 The Inventor's Laboratory
+
+Atlas is not intended merely to predict the future.
+
+It should help people **build it**.
+
+The invention loop:
+
+```text
+OBSERVE
+   ↓
+DETECT FRICTION
+   ↓
+FIND HIDDEN RESOURCE
+   ↓
+RECOMBINE
+   ↓
+FIRST PRINCIPLES
+   ↓
+INVENT
+   ↓
+PROTOTYPE
+   ↓
+TEST
+   ↓
+SCALE
+```
+
+The ecosystem can bring together:
+
+* engineers
+* scientists
+* software developers
+* designers
+* farmers
+* mechanics
+* artisans
+* manufacturers
+* researchers
+* entrepreneurs
+* policy specialists
+* AI agents
+* local communities
+
+The goal:
+
+> **Build what the world is already trying to become.**
+
+---
+
+# 💰 Regenerative Economic Layer
+
+Atlas treats economics as a coordination mechanism in service of human and ecological outcomes.
+
+The intended loop is:
+
+```text
+Capital
+   ↓
+Projects
+   ↓
+Infrastructure
+   ↓
+Outcomes
+   ↓
+Measurement
+   ↓
+Reinvestment
+   ↺
+```
+
+Potential components include:
+
+* impact capital
+* regenerative finance
+* project marketplaces
+* infrastructure finance
+* enterprise systems
+* transparent allocation
+* opportunity discovery
+* local economies
+* global coordination
+* outcome measurement
+
+Capital should become a means of increasing capability rather than the final objective.
+
+---
+
+# 🛡️ Governance, Trust & Security
+
+Civilization-scale intelligence requires civilization-scale responsibility.
+
+Atlas therefore places governance around the intelligence layer rather than treating it as an afterthought.
+
+### Governance principles
+
+* Identity
+* Privacy
+* Security
+* Human oversight
+* Ethical policies
+* Data sovereignty
+* Open standards
+* Accountability
+* Auditability
+* Explainability
+* Permission boundaries
+* Reproducibility
+
+### Architectural principle
+
+> **Intelligence without accountability is dangerous.
+> Coordination without sovereignty is fragile.
+> Scale without ethics is unacceptable.**
+
+Atlas should therefore favor systems that are:
+
+**open where possible, private where necessary, auditable by design, and governed by humans.**
+
+---
+
+# 📚 Atlas Knowledge Ecosystem
+
+Atlas is also a knowledge institution.
+
+Its intellectual architecture includes:
+
+```text
+MASTER CHARTER
+      ↓
+COVENANT
+      ↓
+CIVILIZATION THESIS
+      ↓
+PRODUCT ARCHITECTURE
+      ↓
+LINUX ARCHITECTURE
+      ↓
+AI RESEARCH
+      ↓
+INVENTOR'S HANDBOOK
+      ↓
+FIELD LABS
+      ↓
+ECONOMIC SYSTEM
+      ↓
+GOVERNANCE
+      ↓
+SECURITY
+      ↓
+RESEARCH
+      ↓
+ATLAS CODEX
+```
+
+The repository should become not merely a codebase, but a **living technical and philosophical archive**.
+
+---
+
+# 🌍 Africa as a Living Laboratory
+
+Atlas can begin where real-world complexity is abundant.
+
+Africa provides environments containing:
+
+* rapidly growing cities
+* emerging industries
+* distributed communities
+* informal economies
+* infrastructure gaps
+* renewable-energy potential
+* agricultural systems
+* biodiversity
+* ambitious entrepreneurs
+* scientific institutions
+* manufacturing opportunities
+* large-scale coordination challenges
+
+**Nairobi and East Africa can serve as an initial laboratory.**
+
+The architecture, however, is deliberately global.
+
+```text
+WORKSHOP
+   ↓
+COMMUNITY
+   ↓
+CITY
+   ↓
+REGION
+   ↓
+NATION
+   ↓
+CONTINENT
+   ↓
+PLANET
+```
+
+The ambition is not to build "an African version" of an existing system.
+
+It is to build infrastructure capable of contributing something genuinely new to the world.
+
+---
+
+# 🧬 Atlas as a New Institutional Form
+
+Atlas Sanctum sits at the intersection of multiple disciplines.
+
+```text
+                 ┌─────────────┐
+                 │  Technology │
+                 └──────┬──────┘
+                        │
+        ┌───────────────┼───────────────┐
+        ▼               ▼               ▼
+   AI Research      Engineering     Open Source
+        │               │               │
+        └───────────────┼───────────────┘
+                        ▼
+                 ATLAS SANCTUM
+                        │
+        ┌───────────────┼───────────────┐
+        ▼               ▼               ▼
+   Invention        Economics       Governance
+        │               │               │
+        └───────────────┼───────────────┘
+                        ▼
+                Human Flourishing
+```
+
+Atlas can simultaneously become:
+
+**Technology + Research Institution + Invention Laboratory + Operating System + Economic Network + Knowledge System + Field Organization**
+
+---
+
+# 🧩 Proposed Repository Architecture
+
+```text
+atlas-sanctum/
+│
+├── README.md
+├── LICENSE
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── GOVERNANCE.md
+│
+├── docs/
+│   ├── architecture/
+│   ├── atlas-core/
+│   ├── linux-foundation/
+│   ├── nodes/
+│   ├── opportunity-graph/
+│   ├── knowledge-graph/
+│   ├── simulation/
+│   ├── agents/
+│   ├── governance/
+│   ├── economics/
+│   ├── security/
+│   └── atlas-codex/
+│
+├── core/
+│   ├── intelligence/
+│   ├── agents/
+│   ├── policy/
+│   ├── simulation/
+│   ├── knowledge/
+│   ├── opportunity/
+│   └── impact/
+│
+├── node/
+│   ├── edge/
+│   ├── offline/
+│   ├── identity/
+│   └── protocols/
+│
+├── research/
+│   ├── ai/
+│   ├── civilization/
+│   ├── regenerative-systems/
+│   ├── economics/
+│   └── invention/
+│
+├── labs/
+│   ├── energy/
+│   ├── water/
+│   ├── agriculture/
+│   ├── manufacturing/
+│   ├── health/
+│   ├── cities/
+│   └── ecology/
+│
+├── infrastructure/
+│   ├── linux/
+│   ├── containers/
+│   ├── kubernetes/
+│   ├── networking/
+│   ├── storage/
+│   └── security/
+│
+├── datasets/
+│
+├── schemas/
+│
+├── simulations/
+│
+├── experiments/
+│
+└── community/
+    ├── proposals/
+    ├── field-notes/
+    ├── challenges/
+    └── contributors/
+```
+
+---
+
+# ⚙️ Design Principles
+
+### 01 — Open by Default
+
+Prefer open standards, open protocols, open interfaces, and open-source infrastructure.
+
+### 02 — Local First
+
+Systems should remain useful at the edge and preserve local agency.
+
+### 03 — Intelligence With Agency
+
+AI should assist humans in understanding, creating, coordinating, and executing.
+
+### 04 — Reality Over Abstraction
+
+A successful model must eventually meet the physical world.
+
+### 05 — Measure Outcomes
+
+The system should measure what changes in reality, not merely what happens inside software.
+
+### 06 — Build for Composability
+
+Capabilities should behave like infrastructure, not isolated products.
+
+### 07 — Preserve Human Sovereignty
+
+People and communities must remain participants rather than becoming passive data sources.
+
+### 08 — Think in Systems
+
+Optimize relationships and feedback loops rather than isolated metrics.
+
+### 09 — Design for Regeneration
+
+The goal is not merely efficiency.
+
+The goal is increasing long-term capability, resilience, and flourishing.
+
+### 10 — Civilization Is the Scale
+
+Design local systems so that they can eventually interoperate globally.
+
+---
+
+# 🚀 Development Philosophy
+
+Atlas should be built incrementally.
+
+Not by pretending to solve civilization in version `1.0`.
+
+But by building useful primitives that compound.
+
+```text
+Useful Tool
+     ↓
+Useful Node
+     ↓
+Useful Network
+     ↓
+Useful Intelligence
+     ↓
+Useful Coordination
+     ↓
+Useful Infrastructure
+     ↓
+Civilization Capability
+```
+
+Every component should earn its place by creating measurable utility.
+
+---
+
+# 🔬 Research Areas
+
+Atlas research may span:
+
+* Multi-agent systems
+* Agentic AI
+* Knowledge graphs
+* Opportunity discovery
+* World models
+* Simulation
+* Decision intelligence
+* Distributed AI
+* Edge AI
+* Reinforcement learning
+* Causal inference
+* Systems engineering
+* Complex adaptive systems
+* Regenerative economics
+* Ecological intelligence
+* Human-computer collaboration
+* Governance systems
+* Privacy-preserving computation
+* Distributed identity
+* Open infrastructure
+* Industrial automation
+* Robotics
+* Digital twins
+* Infrastructure optimization
+
+---
+
+# 🌱 Example Field Labs
+
+Atlas can be grounded in real-world experimentation.
+
+### Water
+
+```text
+Water Sources
+     ↓
+Sensors
+     ↓
+Atlas Node
+     ↓
+Prediction
+     ↓
+Infrastructure Planning
+     ↓
+Maintenance
+     ↓
+Water Security
+```
+
+### Agriculture
+
+```text
+Soil + Weather + Crops + Markets
+                ↓
+          Atlas Intelligence
+                ↓
+     Recommendations + Planning
+                ↓
+     Productivity + Resilience
+```
+
+### Manufacturing
+
+```text
+Waste Materials
+      +
+Local Skills
+      +
+Unused Machines
+      +
+Market Demand
+      ↓
+Opportunity Graph
+      ↓
+Prototype
+      ↓
+Local Production
+      ↓
+Jobs + Infrastructure + Value
+```
+
+### Energy
+
+```text
+Generation
+    ↓
+Storage
+    ↓
+Demand
+    ↓
+Optimization
+    ↓
+Coordination
+    ↓
+Reliable Renewable Energy
+```
+
+---
+
+# 🤝 Open Collaboration
+
+Atlas should be built with an ecosystem, not around a closed institution.
+
+Potential contributors include:
+
+* Developers
+* AI researchers
+* Systems engineers
+* Scientists
+* Economists
+* Designers
+* Entrepreneurs
+* Policy researchers
+* Hardware engineers
+* Makers
+* Farmers
+* Artists
+* Universities
+* Enterprises
+* Governments
+* Communities
+* Open-source organizations
+
+The most important contribution is not always code.
+
+It can also be:
+
+**an idea, dataset, experiment, field observation, protocol, research paper, prototype, model, design, dataset, policy proposal, or hard question.**
+
+---
+
+# 🛠️ Getting Started
+
+> **This repository is an evolving foundation.**
+
+As implementation matures, the development stack may include:
+
+```text
+Linux
+Docker
+Kubernetes
+Python
+TypeScript
+Rust
+Go
+PostgreSQL
+Graph Databases
+Vector Databases
+Event Streaming
+GPU Compute
+Edge Compute
+LLM / VLM Systems
+Geospatial Infrastructure
+Observability
+```
+
+The exact implementation should remain subordinate to the architecture.
+
+Technology choices can change.
+
+The principles should not.
+
+---
+
+# 🗺️ Roadmap
+
+## Phase I — Foundation
+
+* [ ] Repository architecture
+* [ ] Core schemas
+* [ ] Linux-native deployment
+* [ ] Atlas Node prototype
+* [ ] Identity and security primitives
+* [ ] Open protocol definitions
+
+## Phase II — Intelligence
+
+* [ ] Knowledge Graph
+* [ ] Opportunity Graph
+* [ ] AI Agent runtime
+* [ ] Policy Engine
+* [ ] Simulation Engine
+* [ ] Impact Ledger
+
+## Phase III — Field Systems
+
+* [ ] Edge deployment
+* [ ] Offline operation
+* [ ] Sensor integrations
+* [ ] GIS integrations
+* [ ] Industrial integrations
+* [ ] Community deployments
+
+## Phase IV — Invention
+
+* [ ] Atlas Inventor Labs
+* [ ] Experimental infrastructure
+* [ ] Automated discovery workflows
+* [ ] Digital twins
+* [ ] Robotics integrations
+* [ ] Field prototyping
+
+## Phase V — Coordination
+
+* [ ] Economic coordination
+* [ ] Project marketplace
+* [ ] Impact capital infrastructure
+* [ ] Cross-node orchestration
+* [ ] Regional networks
+
+## Phase VI — Global Network
+
+* [ ] Interoperable Atlas Nodes
+* [ ] Global research network
+* [ ] Cross-region knowledge exchange
+* [ ] Planetary-scale simulations
+* [ ] Civilization intelligence infrastructure
+
+---
+
+# 🔐 Security
+
+Security is foundational to Atlas.
+
+See:
+
+* [`SECURITY.md`](./SECURITY.md)
+* [`GOVERNANCE.md`](./GOVERNANCE.md)
+* [`docs/security/`](./docs/security/)
+* [`docs/governance/`](./docs/governance/)
+
+Atlas should be designed around:
+
+**least privilege, zero trust, encrypted communications, strong identity, auditable actions, data minimization, secure defaults, and human oversight.**
+
+---
+
+# 📜 Governance
+
+Atlas is intended to evolve as an open ecosystem.
+
+Governance should address:
+
+* technical stewardship
+* protocol evolution
+* AI safety
+* responsible deployment
+* community participation
+* data governance
+* model governance
+* security disclosures
+* ecosystem standards
+* conflict resolution
+* public-interest safeguards
+
+See [`GOVERNANCE.md`](./GOVERNANCE.md).
+
+---
+
+# 📖 The Atlas Codex
+
+The repository should eventually contain a living intellectual corpus:
+
+> **Atlas Codex**
+
+A synthesis of:
+
+* Systems engineering
+* AI
+* Linux
+* Civilization design
+* Economics
+* Ecology
+* Governance
+* Philosophy
+* Scientific invention
+* Industrial design
+* Human flourishing
+
+The Codex should document not only **what Atlas builds**, but **why it exists**.
+
+---
+
+# 🌐 The Long-Term Vision
+
+Imagine a world where a small workshop can run an Atlas Node.
+
+A farmer can participate in a global knowledge network without surrendering local sovereignty.
+
+A hospital can discover unused capacity.
+
+A city can simulate infrastructure decisions before spending billions.
+
+A researcher can connect ideas across disciplines.
+
+A manufacturer can discover new products hidden inside local waste streams.
+
+An entrepreneur can discover opportunities invisible to traditional markets.
+
+A community can coordinate energy, water, mobility, education, and economic activity using open infrastructure.
+
+A scientist can run experiments against shared civilization-scale models.
+
+A policymaker can see consequences before committing resources.
+
+And millions of systems can collaborate without becoming one centralized system.
+
+That is the direction.
+
+---
+
+# 🌍 The End State
+
+Atlas Sanctum ultimately aims to become a distributed substrate through which humanity can:
+
+```text
+SEE MORE
+   ↓
+UNDERSTAND MORE
+   ↓
+IMAGINE MORE
+   ↓
+COORDINATE BETTER
+   ↓
+BUILD BETTER
+   ↓
+MEASURE BETTER
+   ↓
+LEARN FASTER
+   ↓
+FLOURISH TOGETHER
+```
+
+Not an artificial brain for humanity.
+
+Not a centralized machine ruling humanity.
+
+A **shared intelligence infrastructure that helps humanity become more capable of understanding, creating, coordinating, and caring for the world it inhabits.**
+
+---
+
+# ✦ Atlas Sanctum
+
+### Open minds. Open technologies. A brighter human future.
+
+> **Observe deeply.**
+> **Question relentlessly.**
+> **Recombine boldly.**
+> **Build what is missing.**
+
+---
+
+<p align="center">
+  <strong>Linux is the foundation.</strong><br>
+  <strong>Atlas is the intelligence layer.</strong><br>
+  <strong>Reality is the laboratory.</strong><br>
+  <strong>Human flourishing is the objective.</strong>
+</p>
