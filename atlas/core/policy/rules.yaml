@@ -1,0 +1,31 @@
+# Atlas Sanctum — Default Policy Rules
+# Loaded by the PolicyEngine at node startup.
+# Conditions are Python expressions evaluated against a 'context' dict.
+
+- name: human_oversight_required
+  description: High or critical impact actions require explicit human approval
+  condition: "context.get('impact_level','low') not in ('high','critical') or bool(context.get('human_approved', False))"
+  effect: allow
+  priority: 100
+
+- name: data_minimization
+  description: Requests must not include PII fields beyond what is consented
+  condition: |
+    not bool(
+      (set(context.get('fields', [])) & {'name','phone','email','address','national_id'})
+      - set(context.get('consented_fields', []))
+    )
+  effect: allow
+  priority: 90
+
+- name: node_identity_required
+  description: All inter-node messages must carry a verified node_id
+  condition: "bool(context.get('node_id', '').strip())"
+  effect: allow
+  priority: 80
+
+- name: no_autonomous_capital_allocation
+  description: Agents may not allocate capital without human approval
+  condition: "context.get('action_type') != 'capital_allocation' or bool(context.get('human_approved', False))"
+  effect: allow
+  priority: 95

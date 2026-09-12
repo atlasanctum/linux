@@ -18,6 +18,7 @@ from pathlib import Path
 from atlas.schemas.types import NodeConfig, NodeRole, Identity
 from atlas.node.identity.manager import IdentityManager
 from atlas.node.protocols.heartbeat import Heartbeat
+from atlas.core.intelligence.core import AtlasCore
 
 logging.basicConfig(
     level=logging.INFO,
@@ -33,6 +34,7 @@ class AtlasNode:
         self.config = config
         self._running = False
         self._heartbeat = Heartbeat(node_id=config.id, interval=30)
+        self.core = AtlasCore(node_id=config.id, data_dir=STATE_DIR / "core")
 
     # ------------------------------------------------------------------
     def start(self) -> None:
