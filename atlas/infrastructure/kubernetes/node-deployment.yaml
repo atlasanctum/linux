@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atlas-node
+  namespace: atlas
+  labels:
+    app: atlas-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: atlas-node
+  template:
+    metadata:
+      labels:
+        app: atlas-node
+    spec:
+      containers:
+        - name: atlas-node
+          image: atlas-sanctum/node:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ATLAS_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: ATLAS_NODE_ROLE
+              value: "community"
+          volumeMounts:
+            - name: atlas-data
+              mountPath: /root/.atlas
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+      volumes:
+        - name: atlas-data
+          persistentVolumeClaim:
+            claimName: atlas-node-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: atlas-node-pvc
+  namespace: atlas
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: atlas

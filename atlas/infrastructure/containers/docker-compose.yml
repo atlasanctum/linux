@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  atlas-node:
+    build:
+      context: ../..
+      dockerfile: atlas/infrastructure/containers/Dockerfile
+    container_name: atlas-node
+    restart: unless-stopped
+    environment:
+      ATLAS_NODE_NAME: "${ATLAS_NODE_NAME:-atlas-node-01}"
+      ATLAS_NODE_ROLE: "${ATLAS_NODE_ROLE:-edge}"
+      ATLAS_NODE_LOCATION: "${ATLAS_NODE_LOCATION:-}"
+    volumes:
+      - atlas-data:/root/.atlas
+    networks:
+      - atlas-net
+    ports:
+      - "7700:7700"     # Atlas node API (Phase II)
+
+  atlas-db:
+    image: postgres:16-alpine
+    container_name: atlas-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: atlas
+      POSTGRES_USER: atlas
+      POSTGRES_PASSWORD: "${ATLAS_DB_PASSWORD:-changeme}"
+    volumes:
+      - atlas-pg:/var/lib/postgresql/data
+    networks:
+      - atlas-net
+
+  atlas-graph:
+    image: neo4j:5-community
+    container_name: atlas-graph
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: "neo4j/${ATLAS_GRAPH_PASSWORD:-changeme}"
+    volumes:
+      - atlas-neo4j:/data
+    networks:
+      - atlas-net
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+
+volumes:
+  atlas-data:
+  atlas-pg:
+  atlas-neo4j:
+
+networks:
+  atlas-net:
+    driver: bridge
