@@ -1,6 +1,6 @@
 """
 Atlas Sanctum — Phase IV Schema
-DigitalTwin, InventionProposal, ExperimentRun, PrototypeStatus
+DigitalTwin, InventionProposal, ExperimentRun, PrototypeRun, RoboticsTask
 """
 from __future__ import annotations
 from dataclasses import dataclass, field
@@ -30,6 +30,14 @@ class ExperimentStatus(str, Enum):
     FAILED = "failed"
 
 
+class RoboticsTaskStatus(str, Enum):
+    QUEUED = "queued"
+    RUNNING = "running"
+    COMPLETE = "complete"
+    FAILED = "failed"
+    ABORTED = "aborted"
+
+
 @dataclass
 class DigitalTwin:
     """A live digital model of a physical asset or system."""
@@ -38,6 +46,7 @@ class DigitalTwin:
     asset_id: str = ""            # ID of the physical entity in the knowledge graph
     model_type: str = ""          # e.g. "water_pump", "solar_array", "crop_field"
     state: dict[str, Any] = field(default_factory=dict)
+    history: list[dict[str, Any]] = field(default_factory=list)  # timestamped state snapshots
     last_synced: datetime = field(default_factory=datetime.utcnow)
     node_id: str = ""
 
@@ -54,7 +63,26 @@ class InventionProposal:
     domain: str = ""
     status: PrototypeStatus = PrototypeStatus.IDEA
     created_at: datetime = field(default_factory=datetime.utcnow)
+    updated_at: datetime = field(default_factory=datetime.utcnow)
     opportunity_id: str = ""
+    node_id: str = ""
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class PrototypeRun:
+    """
+    Tracks a proposal through the full prototyping lifecycle:
+    IDEA → DESIGNED → PROTOTYPING → TESTING → VALIDATED → SCALING
+    """
+    id: str = field(default_factory=_uid)
+    proposal_id: str = ""
+    title: str = ""
+    status: PrototypeStatus = PrototypeStatus.IDEA
+    stage_notes: dict[str, str] = field(default_factory=dict)  # stage → notes
+    started_at: datetime = field(default_factory=datetime.utcnow)
+    updated_at: datetime = field(default_factory=datetime.utcnow)
+    validated_at: datetime | None = None
     node_id: str = ""
     metadata: dict[str, Any] = field(default_factory=dict)
 
@@ -70,5 +98,22 @@ class ExperimentRun:
     result: dict[str, Any] = field(default_factory=dict)
     status: ExperimentStatus = ExperimentStatus.PENDING
     started_at: datetime | None = None
+    completed_at: datetime | None = None
+    node_id: str = ""
+
+
+@dataclass
+class RoboticsTask:
+    """
+    A task dispatched to a robotic system via the RoboticsAdapter.
+    Represents a unit of physical work: inspection, sampling, actuation.
+    """
+    id: str = field(default_factory=_uid)
+    robot_id: str = ""
+    task_type: str = ""           # e.g. "inspect", "sample", "actuate", "survey"
+    parameters: dict[str, Any] = field(default_factory=dict)
+    status: RoboticsTaskStatus = RoboticsTaskStatus.QUEUED
+    result: dict[str, Any] = field(default_factory=dict)
+    created_at: datetime = field(default_factory=datetime.utcnow)
     completed_at: datetime | None = None
     node_id: str = ""

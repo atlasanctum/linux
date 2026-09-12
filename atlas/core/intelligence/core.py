@@ -19,7 +19,12 @@ from atlas.core.policy.engine import PolicyEngine, human_oversight_required, dat
 from atlas.core.simulation.engine import SimulationEngine, water_demand_model, energy_balance_model
 from atlas.core.impact.ledger import ImpactLedger
 from atlas.core.invention.engine import InventionEngine
-from atlas.core.invention.twins import DigitalTwinEngine, water_pump_updater, solar_array_updater
+from atlas.core.invention.twins import (
+    DigitalTwinEngine, PrototypeManager,
+    water_pump_updater, solar_array_updater,
+    crop_field_updater, clinic_updater,
+    workshop_updater, traffic_junction_updater,
+)
 from atlas.core.coordination.engine import CoordinationEngine
 from atlas.core.coordination.marketplace import Marketplace
 from atlas.core.federation.engine import FederationEngine
@@ -70,6 +75,11 @@ class AtlasCore:
         self.twins = DigitalTwinEngine(node_id=node_id)
         self.twins.register_updater("water_pump", water_pump_updater)
         self.twins.register_updater("solar_array", solar_array_updater)
+        self.twins.register_updater("crop_field", crop_field_updater)
+        self.twins.register_updater("clinic", clinic_updater)
+        self.twins.register_updater("workshop", workshop_updater)
+        self.twins.register_updater("traffic_junction", traffic_junction_updater)
+        self.prototypes = PrototypeManager(node_id=node_id)
 
         # Phase V — Coordination
         self.coordination = CoordinationEngine(self.policy, node_id=node_id)

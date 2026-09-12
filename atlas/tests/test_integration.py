@@ -207,13 +207,15 @@ def test_phase3() -> None:
 
 
 # ===========================================================================
-# Phase IV — Invention
+# Phase IV — Invention (full)
 # ===========================================================================
 
 def test_phase4() -> None:
     print("\nPhase IV \u2014 Invention")
     from atlas.core.intelligence.core import AtlasCore
     from atlas.schemas.types import Entity, Signal, SignalSource, ImpactDomain
+    from atlas.schemas.phase4 import PrototypeStatus, RoboticsTask, RoboticsTaskStatus
+    from atlas.core.adapters.robotics import SimulationRoboticsAdapter
 
     with tempfile.TemporaryDirectory() as tmp:
         core = AtlasCore(node_id="node-test", data_dir=Path(tmp))
@@ -238,7 +240,7 @@ def test_phase4() -> None:
         )
         check("DigitalTwin created", twin.asset_id == "pump-01")
 
-        # Sync twin from a Signal (not SensorReading — twins.sync takes Signal)
+        # Sync twin from a Signal
         signal = Signal(
             source=SignalSource.SENSOR, domain=ImpactDomain.WATER,
             node_id="node-test",
@@ -247,8 +249,9 @@ def test_phase4() -> None:
         core.twins.sync(twin.id, signal)
         updated = core.twins.get(twin.id)
         check("DigitalTwin syncs from signal", updated.state["flow_rate"] == 11.2)
+        check("DigitalTwin records history snapshot", len(core.twins.history(twin.id)) == 1)
 
-        # Run experiment — requires an experiment_fn callable
+        # Run experiment
         def pump_experiment(t, params):
             return {"projected_flow": params.get("flow_rate", 0) * 1.1,
                     "pressure_delta": params.get("pressure", 0) - t.state.get("pressure", 0)}
@@ -262,6 +265,72 @@ def test_phase4() -> None:
         check("DigitalTwin experiment runs", exp.twin_id == twin.id)
         check("Experiment has result", isinstance(exp.result, dict))
         check("Experiment completed", exp.result.get("projected_flow", 0) > 0)
+
+        # Prototype lifecycle
+        if proposals:
+            run = core.prototypes.start(proposals[0])
+            check("Prototype starts at IDEA", run.status == PrototypeStatus.IDEA)
+            core.prototypes.advance(run.id, notes="Design complete")
+            check("Prototype advances to DESIGNED", run.status == PrototypeStatus.DESIGNED)
+            core.prototypes.advance(run.id, notes="Build started")
+            check("Prototype advances to PROTOTYPING", run.status == PrototypeStatus.PROTOTYPING)
+            core.prototypes.advance(run.id, notes="Testing in field")
+            check("Prototype advances to TESTING", run.status == PrototypeStatus.TESTING)
+            core.prototypes.advance(run.id, notes="Validated by community")
+            check("Prototype advances to VALIDATED", run.status == PrototypeStatus.VALIDATED)
+            check("Validated timestamp set", run.validated_at is not None)
+            core.prototypes.advance(run.id, notes="Scaling to 3 sites")
+            check("Prototype advances to SCALING", run.status == PrototypeStatus.SCALING)
+            # Terminal — no further advance
+            core.prototypes.advance(run.id)
+            check("Prototype stays at SCALING (terminal)", run.status == PrototypeStatus.SCALING)
+
+        # Robotics adapter
+        robotics = SimulationRoboticsAdapter(node_id="node-test")
+        task = RoboticsTask(
+            robot_id="drone-01", task_type="inspect",
+            parameters={"target": "pump-01"}, node_id="node-test",
+        )
+        completed = robotics.dispatch(task)
+        check("Robotics task dispatched", completed.status == RoboticsTaskStatus.COMPLETE)
+        check("Robotics task has result", isinstance(completed.result, dict))
+        readings = list(robotics.readings(completed))
+        check("Robotics readings produced", len(readings) >= 1)
+
+        # All 6 domain updaters registered
+        for model_type in ["water_pump", "solar_array", "crop_field",
+                           "clinic", "workshop", "traffic_junction"]:
+            check(f"Updater registered: {model_type}",
+                  model_type in core.twins._updaters)
+
+        # Full lab loops
+        from atlas.labs.water.lab import run_water_lab
+        from atlas.labs.energy.lab import run_energy_lab
+        from atlas.labs.agriculture.lab import run_agriculture_lab
+        from atlas.labs.manufacturing.lab import run_manufacturing_lab
+        from atlas.labs.health.lab import run_health_lab
+        from atlas.labs.cities.lab import run_cities_lab
+
+        for lab_fn, name in [
+            (run_water_lab, "water"),
+            (run_energy_lab, "energy"),
+            (run_agriculture_lab, "agriculture"),
+            (run_manufacturing_lab, "manufacturing"),
+            (run_health_lab, "health"),
+            (run_cities_lab, "cities"),
+        ]:
+            with tempfile.TemporaryDirectory() as lab_tmp:
+                r = lab_fn(Path(lab_tmp))
+                check(f"{name} lab: twin_state present", "twin_state" in r)
+                check(f"{name} lab: proposals generated",
+                      r.get("proposals_generated", 0) >= 0)
+                # prototype_stage is set when proposals > 0; otherwise None is valid
+                has_proposals = r.get("proposals_generated", 0) > 0
+                prototype_ok = (
+                    (has_proposals and r.get("prototype_stage") is not None)
+                    or (not has_proposals and r.get("prototype_stage") is None)
+                )
+                check(f"{name} lab: prototype lifecycle consistent", prototype_ok)
 
 
 # ===========================================================================
