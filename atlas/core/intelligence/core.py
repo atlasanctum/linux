@@ -23,9 +23,11 @@ from atlas.core.invention.twins import DigitalTwinEngine, water_pump_updater, so
 from atlas.core.coordination.engine import CoordinationEngine
 from atlas.core.coordination.marketplace import Marketplace
 from atlas.core.federation.engine import FederationEngine
+from atlas.core.globalnet.engine import GlobalNetworkEngine
 from atlas.schemas.phase2 import AgentTask, SimulationRun
 from atlas.schemas.phase4 import InventionProposal, DigitalTwin
 from atlas.schemas.phase5 import Project
+from atlas.schemas.phase6 import GlobalNetwork, WorldModelSnapshot, ExchangeKind
 from atlas.schemas.types import Opportunity
 
 log = logging.getLogger("atlas.core")
@@ -73,6 +75,9 @@ class AtlasCore:
         self.coordination = CoordinationEngine(self.policy, node_id=node_id)
         self.marketplace = Marketplace()
         self.federation = FederationEngine(node_id=node_id)
+
+        # Phase VI — Global Network
+        self.global_network = GlobalNetworkEngine(node_id=node_id)
 
         log.info("AtlasCore initialised [node=%s]", node_id)
 
@@ -124,3 +129,26 @@ class AtlasCore:
     def invent(self, top_n: int = 5) -> list[InventionProposal]:
         opps = self.scan_opportunities(top_n=top_n)
         return self.invention.propose_all(opps)
+
+    # ------------------------------------------------------------------
+    # Phase VI — Global Network
+    # ------------------------------------------------------------------
+
+    def connect_global_network(self, peer_node_id: str,
+                                peer_capabilities: list[str] | None = None):
+        """Perform interoperability handshake with a remote Atlas node."""
+        return self.global_network.handshake(peer_node_id, peer_capabilities)
+
+    def build_world_model(self, network_id: str,
+                          regional_summaries: list[dict]) -> WorldModelSnapshot:
+        """Aggregate regional summaries into a world model snapshot."""
+        return self.global_network.build_world_snapshot(network_id, regional_summaries)
+
+    def publish_research(self, title: str, description: str,
+                         network_id: str, payload: dict,
+                         tags: list[str] | None = None):
+        """Publish a research artefact to the global network."""
+        return self.global_network.publish_research(
+            ExchangeKind.KNOWLEDGE, title, description,
+            network_id, payload, tags
+        )

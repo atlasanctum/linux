@@ -1,0 +1,30 @@
+[Unit]
+Description=Atlas Sanctum Node
+Documentation=https://github.com/atlas-sanctum/atlas
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=atlas
+Group=atlas
+WorkingDirectory=/opt/atlas
+Environment=PYTHONPATH=/opt/atlas
+ExecStart=/opt/atlas/.venv/bin/python -m atlas.node.node
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=atlas-node
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/atlas /var/log/atlas
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+[Install]
+WantedBy=multi-user.target

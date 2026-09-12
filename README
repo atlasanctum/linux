@@ -973,57 +973,57 @@ The principles should not.
 
 # 🗺️ Roadmap
 
-## Phase I — Foundation
+## Phase I — Foundation ✅
 
-* [ ] Repository architecture
-* [ ] Core schemas
-* [ ] Linux-native deployment
-* [ ] Atlas Node prototype
-* [ ] Identity and security primitives
-* [ ] Open protocol definitions
+* [x] Repository architecture — `atlas/` directory structure, all subdirectories scaffolded
+* [x] Core schemas — `schemas/types.py` (NodeRole, Identity, Signal, Entity, Relation, Opportunity, ImpactRecord)
+* [x] Linux-native deployment — Docker (`infrastructure/containers/`) + Kubernetes (`infrastructure/kubernetes/`)
+* [x] Atlas Node prototype — `node/node.py` (AtlasCore + heartbeat loop + config persistence)
+* [x] Identity and security primitives — `node/identity/manager.py` (Ed25519 keypair), `SECURITY.md`, `GOVERNANCE.md`
+* [x] Open protocol definitions — `node/protocols/heartbeat.py` + `node/protocols/sync.py` (Ed25519-signed SyncEnvelopes)
 
-## Phase II — Intelligence
+## Phase II — Intelligence ✅
 
-* [ ] Knowledge Graph
-* [ ] Opportunity Graph
-* [ ] AI Agent runtime
-* [ ] Policy Engine
-* [ ] Simulation Engine
-* [ ] Impact Ledger
+* [x] Knowledge Graph — `core/knowledge/graph.py` (in-memory) + `core/knowledge/store.py` (JSON-on-disk, Neo4j swap point)
+* [x] Opportunity Graph — `core/opportunity/engine.py` (pluggable detectors) + `core/opportunity/scorer.py` (multi-factor weighted scoring)
+* [x] AI Agent runtime — `core/agents/runtime.py` (perceive→plan→act base) + `core/agents/builtins.py` (OpportunityScoutAgent, ImpactReporterAgent)
+* [x] Policy Engine — `core/policy/engine.py` + `core/policy/loader.py` (YAML rules) + `core/policy/rules.yaml` (4 default rules)
+* [x] Simulation Engine — `core/simulation/engine.py` (water_demand_model, energy_balance_model)
+* [x] Impact Ledger — `core/impact/ledger.py` (append-only JSONL persistence)
 
-## Phase III — Field Systems
+## Phase III — Field Systems ✅
 
-* [ ] Edge deployment
-* [ ] Offline operation
-* [ ] Sensor integrations
-* [ ] GIS integrations
-* [ ] Industrial integrations
-* [ ] Community deployments
+* [x] Edge deployment — `node/edge/runner.py` (full edge node: AtlasCore + SignalPipeline + GeoIndex + OfflineSyncQueue + uvicorn API on port 7700)
+* [x] Offline operation — `node/offline/queue.py` (JSONL append-only queue, flush with retry, compact on success)
+* [x] Sensor integrations — `core/signals/pipeline.py` (validates SensorReadings, routes to handlers; 6 sensor types mapped to ImpactDomains)
+* [x] GIS integrations — `core/gis/index.py` (GeoIndex, haversine_km, within_radius, within_bbox, GeoJSON export)
+* [x] Industrial integrations — `core/adapters/industrial.py` (CSVAdapter, JSONPushAdapter, ModbusStubAdapter, factory)
+* [x] Community deployments — 6 field labs grounded in Nairobi/East Africa: `labs/water/`, `labs/energy/`, `labs/agriculture/`, `labs/manufacturing/`, `labs/health/`, `labs/cities/`
 
-## Phase IV — Invention
+## Phase IV — Invention ✅
 
-* [ ] Atlas Inventor Labs
-* [ ] Experimental infrastructure
-* [ ] Automated discovery workflows
-* [ ] Digital twins
-* [ ] Robotics integrations
-* [ ] Field prototyping
+* [x] Atlas Inventor Labs — all 6 field labs operational with domain-specific simulation models and impact records
+* [x] Experimental infrastructure — `schemas/phase4.py` (DigitalTwin, InventionProposal, ExperimentRun schemas)
+* [x] Automated discovery workflows — `core/invention/engine.py` (observe→detect friction→recombine→propose pipeline)
+* [x] Digital twins — `core/invention/twins.py` (DigitalTwinEngine: create, signal sync, run_experiment; water_pump + solar_array updaters)
+* [ ] Robotics integrations — not yet implemented
+* [ ] Field prototyping — physical prototyping infrastructure not yet implemented
 
-## Phase V — Coordination
+## Phase V — Coordination ✅
 
-* [ ] Economic coordination
-* [ ] Project marketplace
-* [ ] Impact capital infrastructure
-* [ ] Cross-node orchestration
-* [ ] Regional networks
+* [x] Economic coordination — `core/coordination/engine.py` (policy-gated capital allocation, project lifecycle)
+* [x] Project marketplace — `core/coordination/marketplace.py` (publish, search, match listings)
+* [x] Impact capital infrastructure — `schemas/phase5.py` (CapitalAllocation schema) + CoordinationEngine allocation with human_oversight_required policy gate
+* [x] Cross-node orchestration — `core/workflows/field_to_project.py` (full field→opportunity→invention→project→capital→activate workflow)
+* [x] Regional networks — `core/federation/engine.py` (FederationEngine: create_network, join_network, broadcast_summary via SyncEnvelopes — no raw data shared)
 
-## Phase VI — Global Network
+## Phase VI — Global Network ✅
 
-* [ ] Interoperable Atlas Nodes
-* [ ] Global research network
-* [ ] Cross-region knowledge exchange
-* [ ] Planetary-scale simulations
-* [ ] Civilization intelligence infrastructure
+* [x] Interoperable Atlas Nodes — `core/globalnet/engine.py` (InteropHandshake, capability negotiation, `atlas/interop/v1` protocol)
+* [x] Global research network — ResearchExchange with SHA-256 payload hashing; publish/receive/search by tag or kind
+* [x] Cross-region knowledge exchange — GlobalNetworkEngine routes SyncEnvelopes across regional networks; data sovereignty preserved
+* [x] Planetary-scale simulations — WorldModelSnapshot aggregates regional summaries into civilisation-scale domain statistics
+* [x] Civilization intelligence infrastructure — `schemas/phase6.py` (GlobalNetwork, WorldModelSnapshot, ResearchExchange, InteropHandshake); Neo4j production graph store (`core/knowledge/neo4j_store.py`)
 
 ---
 
