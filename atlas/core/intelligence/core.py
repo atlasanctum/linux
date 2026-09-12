@@ -18,7 +18,14 @@ from atlas.core.agents.builtins import OpportunityScoutAgent, ImpactReporterAgen
 from atlas.core.policy.engine import PolicyEngine, human_oversight_required, data_minimization
 from atlas.core.simulation.engine import SimulationEngine, water_demand_model, energy_balance_model
 from atlas.core.impact.ledger import ImpactLedger
+from atlas.core.invention.engine import InventionEngine
+from atlas.core.invention.twins import DigitalTwinEngine, water_pump_updater, solar_array_updater
+from atlas.core.coordination.engine import CoordinationEngine
+from atlas.core.coordination.marketplace import Marketplace
+from atlas.core.federation.engine import FederationEngine
 from atlas.schemas.phase2 import AgentTask, SimulationRun
+from atlas.schemas.phase4 import InventionProposal, DigitalTwin
+from atlas.schemas.phase5 import Project
 from atlas.schemas.types import Opportunity
 
 log = logging.getLogger("atlas.core")
@@ -55,6 +62,17 @@ class AtlasCore:
 
         # Impact
         self.impact = ImpactLedger(store_path=data_dir / "impact_ledger.jsonl")
+
+        # Phase IV — Invention
+        self.invention = InventionEngine(self.graph, node_id=node_id)
+        self.twins = DigitalTwinEngine(node_id=node_id)
+        self.twins.register_updater("water_pump", water_pump_updater)
+        self.twins.register_updater("solar_array", solar_array_updater)
+
+        # Phase V — Coordination
+        self.coordination = CoordinationEngine(self.policy, node_id=node_id)
+        self.marketplace = Marketplace()
+        self.federation = FederationEngine(node_id=node_id)
 
         log.info("AtlasCore initialised [node=%s]", node_id)
 
@@ -98,3 +116,11 @@ class AtlasCore:
 
     def simulate(self, model: str, parameters: dict[str, Any], label: str = "") -> SimulationRun:
         return self.simulation.run(model, parameters, label=label)
+
+    # ------------------------------------------------------------------
+    # Invention
+    # ------------------------------------------------------------------
+
+    def invent(self, top_n: int = 5) -> list[InventionProposal]:
+        opps = self.scan_opportunities(top_n=top_n)
+        return self.invention.propose_all(opps)
